@@ -28,13 +28,13 @@
             <div class="col-1 mb-3">
                 <a href="{{ route('admin.post.create') }}" class="btn btn-primary">Добавить</a>
             </div>
+
             <div class="col-1 mb-3">
                 <form action="{{ route('admin.post.export') }}" method="POST">
                   @csrf
                   <input type="submit" value="Экспорт" class="btn btn-success">
                 </form>
               </div>
-
 
               <div class="col-2 mb-3 ml-3">
                 <form action="{{ route('admin.post.import') }}" method="POST" enctype="multipart/form-data">
@@ -43,16 +43,6 @@
                   <button type="submit" class="btn btn-warning">&nbsp;Импорт&nbsp;</button>
                 </form>
               </div>
-
-
-            {{-- <div class="col-1 mb-3 ml-3">
-              <form action="{{ route('admin.post.import') }}" method="POST" enctype="multipart/form-data">
-                @csrf
-                <input type="file" class="form-control" name="files">
-                <button type="submit" class="btn btn-warning">&nbsp;Импорт&nbsp;</button>
-              </form>
-            </div> --}}
-
 
             <div class="col-12">
             <div class="card">
