@@ -29,11 +29,20 @@
                 <a href="{{ route('admin.post.create') }}" class="btn btn-primary">Добавить</a>
             </div>
             <div class="col-1 mb-3">
-              <form action="{{ route('admin.post.export') }}" method="POST">
-                @csrf
-                <input type="submit" value="Экспорт" class="btn btn-muted">
-              </form>
-            </div>
+                <form action="{{ route('admin.post.export') }}" method="POST">
+                  @csrf
+                  <input type="submit" value="Экспорт" class="btn btn-success">
+                </form>
+              </div>
+
+
+              <div class="col-2 mb-3 ml-3">
+                <form action="{{ route('admin.post.import') }}" method="POST" enctype="multipart/form-data">
+                  @csrf
+                  <input type="file" class="form-control" name="import_file">
+                  <button type="submit" class="btn btn-warning">&nbsp;Импорт&nbsp;</button>
+                </form>
+              </div>
 
 
             {{-- <div class="col-1 mb-3 ml-3">
@@ -60,7 +69,7 @@
                     </div>
                   </div>
                 </div>
-                <!-- ./card-header --> 
+                <!-- ./card-header -->
                 <div class="container d-flex justify-content-center">
                 <div class="card-body">
                   <table class="table table-bordered table-hover col-10">
@@ -75,9 +84,9 @@
                         <th colspan="6" class="text-center">Действия</th>
                       </tr>
                     </thead>
-                    <tbody> 
+                    <tbody>
                       @php
-                        $i = 0;  
+                        $i = 0;
                       @endphp
                       @foreach ($posts as $post)
                       <tr aria-expanded="false">
@@ -87,13 +96,13 @@
                           @if($post->category_id == 6)
                           <p class="blog-post-category" style="font-size: large;"><mark style="color:orangered"><strong>{{ $post->category->title }}</i></strong></mark></p>
                           @else
-                          <p class="blog-post-category" style="font-size: large;"><mark><strong>{{ $post->category->title }}</strong></mark></p>   
+                          <p class="blog-post-category" style="font-size: large;"><mark><strong>{{ $post->category->title }}</strong></mark></p>
                           @endif
                         </td>
                         <td>{{ $post->start_time }}</td>
-                        <td>{{ $post->end_time }}</td> 
-                        <td>{{ $time[$i] }}</td> 
-                        
+                        <td>{{ $post->end_time }}</td>
+                        <td>{{ $time[$i] }}</td>
+
                         <td class="text-center"></i>
                           @if((auth()->user()->dislikedPosts->contains($post->id) != 1))
                           <form id="myform{{$i}}" action="{{ route('post.like.store', $post->id) }}" method="POST">
@@ -104,7 +113,7 @@
                                 @if(auth()->user()->likedPosts->contains($post->id))
                                   <i class="text-success fas fa-thumbs-up" style="font-size: large;"><strong>Согласовано </strong></i>
                                 @else
-                                  <i><u>Согласовать</u></i> 
+                                  <i><u>Согласовать</u></i>
                                 @endif
                               @endif
                               @endauth
@@ -125,7 +134,7 @@
                                 @if(auth()->user()->dislikedPosts->contains($post->id))
                                   <i class="text-danger fas fa-thumbs-down" style="font-size: large;"><strong>Отклонено</strong></i>
                                 @else
-                                  <i><u>Отклонить</u></i> 
+                                  <i><u>Отклонить</u></i>
                                 @endif
                               @else
                               <p class="text-muted"><a class="text-muted" href="{{ route('admin.post.edit', $post->id) }}">необходимо редактировать</p></a>
@@ -168,14 +177,14 @@
                               </th>
                             </tr>
                           </thead>
-                        <tbody> 
+                        <tbody>
                           @php
-                            $j = 0;  
+                            $j = 0;
                           @endphp
                           @foreach ($posts as $post)
                           <tr aria-expanded="false">
-                            <td class="text-center">                           
-                              <input type="checkbox" name="options[]" value="{{$post->id}}" id="option-{{$post->id}}">                           
+                            <td class="text-center">
+                              <input type="checkbox" name="options[]" value="{{$post->id}}" id="option-{{$post->id}}">
                             </td>
                           </tr>
                             @php
@@ -187,7 +196,7 @@
                         </table>
                         </div>
                         </div>
-                  </div> 
+                  </div>
                 </div>
                 </div>
                 <!-- /.card-body -->
